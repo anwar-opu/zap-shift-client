@@ -10,6 +10,9 @@ import Rider from "../pages/Rider/Rider";
 import PrivateRoute from "./PrivateRoute";
 import ForgotPassword from "../pages/Auth/ForgotPassword/ForgotPassword";
 import SendParcel from "../pages/SendParcel/SendParcel";
+import DashBoardLayout from "../layouts/DashBoardLayout";
+import MyParcels from "../pages/Dashboard/MyParcels/MyParcels";
+import Payment from "../pages/Dashboard/Payment/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -65,6 +68,24 @@ export const router = createBrowserRouter([
       {
         path: "forgotPassword",
         Component: ForgotPassword,
+      },
+    ],
+  },
+  {
+    path: "dashboard",
+    element: (
+      <PrivateRoute>
+        <DashBoardLayout></DashBoardLayout>
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        path: "my-parcels",
+        Component: MyParcels,
+      },
+      {
+        path: "payment/:parcelId",
+        Component: Payment,
       },
     ],
   },
