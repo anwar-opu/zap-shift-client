@@ -5,7 +5,7 @@ import { TiEdit } from "react-icons/ti";
 import { MdDeleteForever } from "react-icons/md";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import Swal from "sweetalert2";
-import { Link } from "react-router";
+// import { Link } from "react-router";
 
 const MyParcels = () => {
   const { user } = useAuth();
@@ -46,6 +46,23 @@ const MyParcels = () => {
     });
   };
 
+  const handlePayment = async (parcel) => {
+    const paymentInfo = {
+      cost: parcel.cost,
+      parcelId: parcel._id,
+      parcelName: parcel.parcelName,
+      senderEmail: parcel.senderEmail,
+    };
+
+    const res = await axiosSecure.post(
+      `/payment-checkout-session`,
+      paymentInfo,
+    );
+
+    window.location.assign(res.data.url);
+    console.log(res.data.url);
+  };
+
   return (
     <div>
       <h2>All of my Parcels {parcels.length}</h2>
@@ -70,13 +87,21 @@ const MyParcels = () => {
                 <td>{parcel.cost}</td>
                 <td>
                   {parcel.paymentStatus === "paid" ? (
-                    <span className="text-green-500">Paid</span>
+                    <span className="text-green-500 font-bold btn btn-sm">
+                      Paid
+                    </span>
                   ) : (
-                    <Link to={`/dashboard/payment/${parcel._id}`}>
-                      <button className="btn btn-sm btn-primary text-secondary">
-                        Pay
-                      </button>
-                    </Link>
+                    // <Link to={`/dashboard/payment/${parcel._id}`}>
+                    //   <button className="btn btn-sm btn-primary text-secondary">
+                    //     Pay
+                    //   </button>
+                    // </Link>
+                    <button
+                      onClick={() => handlePayment(parcel)}
+                      className="btn btn-sm btn-primary text-secondary"
+                    >
+                      Pay
+                    </button>
                   )}
                 </td>
                 <td></td>

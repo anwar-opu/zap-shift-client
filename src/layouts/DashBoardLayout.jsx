@@ -1,4 +1,6 @@
 import { CiDeliveryTruck } from "react-icons/ci";
+import { FaHistory } from "react-icons/fa";
+import { RiMotorbikeFill } from "react-icons/ri";
 import { Link, NavLink, Outlet } from "react-router";
 
 const DashBoardLayout = () => {
@@ -84,6 +86,32 @@ const DashBoardLayout = () => {
                 {/* Settings icon */}
                 <CiDeliveryTruck className="w-4 h-4" size={22} />
                 <span className="is-drawer-close:hidden">My Parcels</span>
+              </NavLink>
+            </li>
+
+            {/* payment history  */}
+            <li>
+              <NavLink
+                to="/dashboard/payments-history"
+                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                data-tip="Payment History"
+              >
+                {/* Settings icon */}
+                <FaHistory className="w-3 h-3 text-gray-600" size={22} />
+                <span className="is-drawer-close:hidden">Payment History</span>
+              </NavLink>
+            </li>
+
+            {/* Approve Riders  */}
+            <li>
+              <NavLink
+                to="/dashboard/approve-riders"
+                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                data-tip="Approve Riders"
+              >
+                {/* Settings icon */}
+                <RiMotorbikeFill className="w-3 h-3 text-gray-600" size={22} />
+                <span className="is-drawer-close:hidden">Approve Riders</span>
               </NavLink>
             </li>
 
