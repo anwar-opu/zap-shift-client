@@ -5,6 +5,7 @@ import { TiEdit } from "react-icons/ti";
 import { MdDeleteForever } from "react-icons/md";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import Swal from "sweetalert2";
+import { Link } from "react-router";
 // import { Link } from "react-router";
 
 const MyParcels = () => {
@@ -52,6 +53,7 @@ const MyParcels = () => {
       parcelId: parcel._id,
       parcelName: parcel.parcelName,
       senderEmail: parcel.senderEmail,
+      trackingId: parcel.trackingId,
     };
 
     const res = await axiosSecure.post(
@@ -75,6 +77,7 @@ const MyParcels = () => {
               <th>Parcel Name</th>
               <th>Cost</th>
               <th>Payment </th>
+              <th>Tracking Id</th>
               <th>Delivery Status</th>
               <th>Actions</th>
             </tr>
@@ -104,7 +107,12 @@ const MyParcels = () => {
                     </button>
                   )}
                 </td>
-                <td></td>
+                <td>
+                  <Link to={`/parcel-track/${parcel.trackingId}`}>
+                    {parcel.trackingId}
+                  </Link>
+                </td>
+                <td>{parcel.deliveryStatus}</td>
                 <td className="">
                   <button className="btn btn-square mr-3 hover:bg-primary">
                     <FaMagnifyingGlass />

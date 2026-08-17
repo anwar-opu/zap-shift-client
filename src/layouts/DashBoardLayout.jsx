@@ -1,9 +1,17 @@
 import { CiDeliveryTruck } from "react-icons/ci";
-import { FaHistory } from "react-icons/fa";
-import { RiMotorbikeFill } from "react-icons/ri";
+import { FaHistory, FaTasks, FaUsers } from "react-icons/fa";
+import { RiEBikeFill, RiMotorbikeFill } from "react-icons/ri";
 import { Link, NavLink, Outlet } from "react-router";
+import useRole from "../hooks/useRole";
+import Loading from "../components/Loading/Loading";
+import { SiGoogletasks } from "react-icons/si";
 
 const DashBoardLayout = () => {
+  const { role, isLoading } = useRole();
+
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <div className="drawer lg:drawer-open max-w-7xl mx-auto">
       <input
@@ -102,18 +110,94 @@ const DashBoardLayout = () => {
               </NavLink>
             </li>
 
-            {/* Approve Riders  */}
-            <li>
-              <NavLink
-                to="/dashboard/approve-riders"
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="Approve Riders"
-              >
-                {/* Settings icon */}
-                <RiMotorbikeFill className="w-3 h-3 text-gray-600" size={22} />
-                <span className="is-drawer-close:hidden">Approve Riders</span>
-              </NavLink>
-            </li>
+            {/* only for rider */}
+            {role === "rider" && (
+              <>
+                {/*Assigned Deliveries  */}
+                <li>
+                  <NavLink
+                    to="/dashboard/assigned-deliveries"
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Assigned Deliveries"
+                  >
+                    {/* Settings icon */}
+                    <FaTasks className="w-3 h-3 text-gray-600" size={22} />
+                    <span className="is-drawer-close:hidden">
+                      Assigned Deliveries
+                    </span>
+                  </NavLink>
+                </li>
+                {/* Completed Deliveries */}
+                <li>
+                  <NavLink
+                    to="/dashboard/completed-deliveries"
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Completed Deliveries"
+                  >
+                    {/* Settings icon */}
+                    <SiGoogletasks
+                      className="w-3 h-3 text-gray-600"
+                      size={22}
+                    />
+                    <span className="is-drawer-close:hidden">
+                      Completed Deliveries
+                    </span>
+                  </NavLink>
+                </li>
+              </>
+            )}
+
+            {/* admin only access */}
+            {role === "admin" && (
+              <>
+                {/* Approve Riders  */}
+                <li>
+                  <NavLink
+                    to="/dashboard/approve-riders"
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Approve Riders"
+                  >
+                    {/* Settings icon */}
+                    <RiMotorbikeFill
+                      className="w-3 h-3 text-gray-600"
+                      size={22}
+                    />
+                    <span className="is-drawer-close:hidden">
+                      Approve Riders
+                    </span>
+                  </NavLink>
+                </li>
+
+                <li>
+                  <NavLink
+                    to="/dashboard/assign-riders"
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Assign Riders"
+                  >
+                    {/* Settings icon */}
+                    <RiEBikeFill className="w-3 h-3 text-gray-600" size={22} />
+                    <span className="is-drawer-close:hidden">
+                      Assign Riders
+                    </span>
+                  </NavLink>
+                </li>
+
+                {/* Users  Management */}
+                <li>
+                  <NavLink
+                    to="/dashboard/users-management"
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Users Management"
+                  >
+                    {/* Settings icon */}
+                    <FaUsers className="w-3 h-3 text-gray-600" size={22} />
+                    <span className="is-drawer-close:hidden">
+                      Users Management
+                    </span>
+                  </NavLink>
+                </li>
+              </>
+            )}
 
             {/* List item */}
             <li>
