@@ -9,7 +9,7 @@ const PaymentSuccess = () => {
   const axiosSecure = useAxiosSecure();
   const hasRun = useRef(false);
 
-  console.log(sessionId);
+  // console.log(sessionId);
 
   useEffect(() => {
     if (sessionId && !hasRun.current) {

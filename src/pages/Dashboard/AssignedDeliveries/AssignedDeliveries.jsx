@@ -96,7 +96,7 @@ const AssignedDeliveries = () => {
                   </button>
                   <button
                     onClick={() => {
-                      handleDeliveryStatusUpdate(parcel, "parcel_delivered");
+                      handleDeliveryStatusUpdate(parcel, "parcel-delivered");
                     }}
                     className="btn btn-primary text-secondary mr-2"
                   >
